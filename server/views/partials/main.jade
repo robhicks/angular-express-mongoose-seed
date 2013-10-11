@@ -1,0 +1,11 @@
+#content.container
+    .nav.nav-tabs
+
+        li.selectable(ng-class="{active: $state.includes('root.main.loans')}")
+            a(ui-sref="root.main.loans") Loans
+
+        li.selectable(ng-class="{active: $state.includes('root.main.borrowers')}")
+            a(ui-sref="root.main.borrowers") Borrowers
+
+    <div ui-view></div>
+

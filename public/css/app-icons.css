@@ -1,0 +1,117 @@
+
+@charset "UTF-8";
+
+@font-face {
+    font-family: "app";
+    src:url("fonts/app.eot");
+    src:url("fonts/app.eot?#iefix") format("embedded-opentype"),
+    url("fonts/app.ttf") format("truetype"),
+    url("fonts/app.svg#app") format("svg"),
+    url("fonts/app.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+[data-icon]:before {
+    font-family: "app" !important;
+    content: attr(data-icon);
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+    font-family: "app" !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+.icon-dashboard:before {
+    content: "a";
+}
+
+.icon-dollar:before {
+    content: "b";
+}
+
+.icon-wrench:before {
+    content: "c";
+}
+
+.icon-ok:before {
+    content: "d";
+}
+
+.icon-list:before {
+    content: "e";
+}
+
+.icon-add:before {
+    content: "f";
+}
+
+.icon-back:before {
+    content: "g";
+}
+
+.icon-forward:before {
+    content: "h";
+}
+
+.icon-up:before {
+    content: "i";
+}
+
+.icon-down:before {
+    content: "j";
+}
+
+.icon-user:before {
+    content: "k";
+}
+
+.icon-trash:before {
+    content: "l";
+}
+
+.icon-business:before {
+    content: "m";
+}
+
+.icon-lock:before {
+    content: "n";
+}
+
+.icon-unlock:before {
+    content: "o";
+}
+
+.icon-refresh:before {
+    content: "p";
+}
+
+.icon-edit:before {
+    content: "q";
+}
+
+.icon-save:before {
+    content: "r";
+}
+
+.icon-calculator:before {
+    content: "s";
+}

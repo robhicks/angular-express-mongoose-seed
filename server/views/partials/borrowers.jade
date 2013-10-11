@@ -1,0 +1,126 @@
+.panel.panel-default.mtop-12(ng-controller="BorrowerCtrl as borrowers")
+    .panel-body(ng-if="!borrowers.edit")
+        button.btn.btn-primary(ng-click="borrowers.addBorrower()")
+            span.icon-add
+            | &#160; Add
+
+        table.table.table-condensed.tabled-striped
+            thead
+                tr
+                    th Type
+                    th Loan ID
+                    th Name
+                    th Phone
+                    th Address
+                    th Email
+            tbody
+                tr(ng-repeat="borrower in borrowers.data.borrowers", ng-click="borrowers.editBorrower($index)").selectable
+                    td {{borrower.typeOfBorrower}}
+                    td {{borrower.loanId}}
+                    td(ng-show="borrower.typeOfBorrower == 'Company'") {{borrower.name}}
+                    td(ng-show="borrower.typeOfBorrower == 'Individual'") {{borrower.familyName}}, {{borrower.givenName}}
+                    td {{borrower.phoneNumber}}
+                    td {{borrower.address}}
+                    td {{borrower.email}}
+
+    .panel-body(ng-if="borrowers.edit")
+        .panel.panel-default
+            .panel-heading
+                .panel-title Add / Update Borrower
+            .panel-body
+                form(name="borrower_add_form", novalidate).form-horizontal
+                    .form-group
+                        label.control-label.col-lg-3.col-md-4.col-sm-5 Type of Borrower
+                        .col-lg-9.col-md-8.col-sm-7
+                            label.radio-inline
+                                input(type="radio", ng-model="borrowers.data.borrower.typeOfBorrower", value="Individual")
+                                span.icon-user &#160;
+                                | Individual
+                            label.radio-inline
+                                input(type="radio", ng-model="borrowers.data.borrower.typeOfBorrower", value="Company")
+                                span.icon-business &#160;
+                                | Company
+
+                    fieldset.well(ng-if="borrowers.data.borrower.typeOfBorrower == 'Individual'")
+
+                        .form-group
+                            label.control-label.col-lg-3.col-md-4.col-sm-5 Loan ID
+                            .col-lg-9.col-md-8.col-sm-7
+                                select(ng-model="borrowers.data.borrower.loanId", required, ng-options="loan._id as loan._id for loan in borrowers.data.loans").form-control
+
+
+                        .form-group
+                            label.control-label.col-lg-3.col-md-4.col-sm-5 First Name
+                            .col-lg-9.col-md-8.col-sm-7
+                                input.form-control(type="text", ng-model="borrowers.data.borrower.givenName", ng-required="borrowers.data.borrower.typeOfBorrower == 'Individual'")
+
+                        .form-group
+                            label.control-label.col-lg-3.col-md-4.col-sm-5 Last Name
+                            .col-lg-9.col-md-8.col-sm-7
+                                input.form-control(type="text", ng-model="borrowers.data.borrower.familyName", ng-required="borrowers.data.borrower.typeOfBorrower == 'Individual'")
+
+                        .form-group
+                            label.control-label.col-lg-3.col-md-4.col-sm-5 Email
+                            .col-lg-9.col-md-8.col-sm-7
+                                input.form-control(type="email", ng-model="borrowers.data.borrower.email", ng-required="borrowers.data.borrower.typeOfBorrower == 'Individual'")
+
+                        .form-group
+                            label.control-label.col-lg-3.col-md-4.col-sm-5 Home Number
+                            .col-lg-9.col-md-8.col-sm-7
+                                input.form-control(type="text", ng-model="borrowers.data.borrower.homeNumber", valid-phone, placeholder="222-222-2222")
+
+                        .form-group
+                            label.control-label.col-lg-3.col-md-4.col-sm-5 Mobile Number
+                            .col-lg-9.col-md-8.col-sm-7
+                                input.form-control(type="text", ng-model="borrowers.data.borrower.mobileNumber", valid-phone, placeholder="222-222-2222")
+
+                        .form-group
+                            label.control-label.col-lg-3.col-md-4.col-sm-5 Address
+                            .col-lg-9.col-md-8.col-sm-7
+                                textarea.form-control(rows="3", type="text", ng-model="borrowers.data.borrower.address", ng-required="borrowers.data.borrower.typeOfBorrower == 'Individual'")
+
+                        .form-group
+                            label.control-label.col-lg-3.col-md-4.col-sm-5 SSN
+                            .col-lg-9.col-md-8.col-sm-7
+                                input.form-control(type="text", ng-model="borrowers.data.borrower.ssn")
+
+
+                    fieldset(ng-if="borrowers.data.borrower.typeOfBorrower == 'Company'").well
+                        .form-group
+                            label.control-label.col-lg-3.col-md-4.col-sm-5 Loan ID
+                            .col-lg-9.col-md-8.col-sm-7
+                                select(ng-model="borrowers.data.borrower.loanId", required, ng-options="loan._id as loan._id for loan in borrowers.data.loans").form-control
+
+                        .form-group
+                            label.col-lg-3.col-md-4.control-label(ng-required="borrowers.data.borrower.typeOfBorrower == 'Company'") Name
+                            .col-lg-9.col-md-8
+                                input.form-control(type="text", ng-model="borrowers.data.borrower.name", ng-required="borrowers.data.borrower.typeOfBorrower == 'Company'")
+                        .form-group
+                            label.col-lg-3.col-md-4.control-label Description
+                            .col-lg-9.col-md-8
+                                input.form-control(type="text", ng-model="borrowers.data.borrower.description")
+                        .form-group
+                            label.col-lg-3.col-md-4.control-label Address
+                            .col-lg-9.col-md-8
+                                textarea.form-control(ng-model="borrowers.data.borrower.address", rows="3", ng-required="borrowers.data.borrower.typeOfBorrower == 'Company'")
+                        .form-group
+                            label.col-lg-3.col-md-4.control-label Phone Number
+                            .col-lg-9.col-md-8
+                                input.form-control(type="text", ng-model="borrowers.data.borrower.phoneNumber", ng-required="borrowers.data.borrower.typeOfBorrower == 'Company'", valid-phone, placeholder="222-222-2222")
+                        .form-group
+                            label.control-label.col-lg-3.col-md-4.col-sm-5 EIN
+                            .col-lg-9.col-md-8.col-sm-7
+                                input.form-control(type="text", ng-model="borrowers.data.borrower.ein")
+
+                    fieldset.well
+                        .form-group
+                            label.control-label.col-lg-3.col-md-4.col-sm-5
+                            .col-lg-9.col-md-8.col-sm-7
+                                button.btn.btn-primary(ng-click="borrowers.updateBorrower()")
+                                    span.icon-save
+                                    | &#160; Update Borrower
+                                button.btn.btn-danger(ng-click="borrowers.deleteBorrower()")
+                                    span.icon-trash
+                                    | &#160; Remove Borrower
+                                | &#160; or &#160;
+                                a(href="", ng-click="borrowers.getBorrowers()") cancel
