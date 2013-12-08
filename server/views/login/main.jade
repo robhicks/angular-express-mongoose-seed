@@ -1,0 +1,24 @@
+.container#login(ng-controller="LoginCtrl as auth")
+    input(type='hidden', id="token", value="#{token}")
+    input(type='hidden', id="sId", value="#{sId}")
+    .row
+        .col.col-xs-12.col-sm-12.col-md-offset-2.col-md-8.col-lg-offset-3.col-lg-6
+            .panel.panel-default
+                .panel-heading.panel-title(ng-hide="auth.title") Login
+                .panel-heading.panel-title(ng-show="auth.title") Login - {{auth.title}}
+
+                .panel-body
+
+                    <div ui-view></div>
+
+                .panel-footer
+                    div(ng-hide="auth.legals", style="font-size:90%;")
+                        | By accessing this site, you agree to the &#160;
+                        a(ui-sref="auth.terms", ng-click="auth.showTerms()") Terms &amp; Conditions
+                        | &#160; and &#160;
+                        a(ui-sref="auth.privacy", ng-click="auth.showPrivacy()") Privacy Policy
+                        | .
+                    div(ng-show="auth.legals")
+                        a(ui-sref="auth.login", ng-click="auth.showLogin()")
+                            span.icon-back
+                            | &#160; Back to Login

@@ -1,0 +1,43 @@
+form.form-horizontal(name='createAccountForm', novalidate)
+    .form-group
+        label.col-lg-3(for='fullName') Name:
+        .col-lg-9
+            input.form-control(type='text', ng-model='us.user.givenName', ng-minlength='3', required, placeholder='First Name', autofocus)
+    .form-group
+        label.col-lg-3(for='fullName')
+        .col-lg-9
+            input.form-control(type='text', ng-model='us.user.familyName', required, ng-minlength='3', placeholder='Last Name')
+    .form-group
+        label.col-lg-3(for='email') Email Address:
+        .col-lg-9
+            input.form-control(type='email', ng-model='us.user.email', required, is-email-unique)
+            .alert.alert-danger(ng-show='email_not_unique')
+                | Email address taken. &#160;
+                a(us-sref="auth.login") Log in &#160;
+                | if you have an account.
+    .form-group
+        label.col-lg-3(for='username') Username:
+        .col-lg-9
+            input.form-control(type='text', ng-model='us.user.username', required, is-username-unique)
+            .alert.alert-error(ng-show='username_not_unique')
+                | Username is not unique. &#160;
+                a(href='#/') Log in&#160;
+                | if you already have an account.
+
+    .form-group
+        label.col-lg-3(for='password') Password
+        .col-lg-9
+            input.form-control(type='password', ng-model='us.user.password', placeholder='Password', required, ng-minlength='8', password-strength)
+            input.form-control(type='password', ng-model='us.user.vpassword', placeholder='Verify Password', required, ng-minlength='8', match-password)
+            .alert.alert-danger(ng-show='cant_be_username') Password can't be username (forward or reverse).
+            .alert.alert-danger(ng-show='cant_be_email') Password can't be email address (forward or reverse).
+            .alert.alert-danger(ng-show='cant_be_dictionary') Password can't be so simple.
+            .alert.alert-danger(ng-show='passwords_dont_match') Passwords don't match.
+    .form-group
+        label.col-lg-3 Strength:
+        .col-lg-9
+            .strength(ng-class='strength') {{strength}}
+    .button-group
+        button.btn.btn-primary(ng-click='createAccount()', ng-disabled='createAccountForm.$invalid') Create Account
+        | &#160; or &#160;
+        a(ui-sref="auth.login", ng-click="showLogin()") Cancel

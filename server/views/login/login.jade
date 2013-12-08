@@ -1,0 +1,31 @@
+form(novalidate, name='loginForm').form-horizontal
+
+    .form-group
+        .col-lg-12.col-md-12
+            .alert.alert-danger(ng-show='auth.message')
+                | We did not recognize your credentials. You can try again, or if you
+                | have forgotten your username or password, click the "Forgot my credentials"
+                | link below.
+    .form-group
+        label.col-lg-2.col-md-2 Username:
+        .col-lg-10.col-md-10
+            input.form-control(type='text', tabindex='1', ng-model='us.user.username', required, ng-minlength='8', autofocus)
+
+    .form-group
+        label.col-lg-2.col-md-2 Password:
+        .col-lg-10.col-md-10
+            input.form-control(type='password', tabindex='2', ng-model='us.user.password', required, ng-minlength='8')
+
+    //
+        .form-group(ng-show="us.user.roles.length > 0")
+            label.col-lg-2.col-md-2 Role:
+            .col-lg-10.col-md-10
+                select.form-control(ng-model="us.user.role", tabindex='3' required, ng-options="i.name for i in us.user.roles")
+
+    .form-group
+        label.col-lg-2.col-md-2
+        .col-lg-10.col-md-10
+            a(ui-sref="auth.resetCredentials", ng-click="auth.showResetCredentials()") Forgot my credentials - Reset
+
+    .button-group
+        button.btn.btn-primary(ng-click='auth.login()', ng-disabled='loginForm.$invalid', tabindex='4') Login
