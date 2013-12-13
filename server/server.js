@@ -19,7 +19,7 @@ conn.once('open', function () {
 });
 
 /** Configuration  */
-app.set('port', 3000);
+app.set('port', 3001);
 app.use(express.errorHandler());
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
@@ -39,7 +39,7 @@ app.use(express.static(path.join(rootDir, 'app')));
 app.use(app.router);
 
 /** Routes */
-var login = require('./routes/login');
+var auth = require('./routes/auth');
 var module1 = require('./routes/module1');
 var module2 = require('./routes/module2');
 var profile = require('./routes/profile');
@@ -48,9 +48,9 @@ var profile = require('./routes/profile');
 // serve index
 app.get('/', function(req, res){res.render('index', {env: mode});});
 
-app.namespace('/login', function(){
-    app.get('/partials/:name', login.partials);
-    app.all('/api/:name', login.api);
+app.namespace('/auth', function(){
+    app.get('/partials/:name', auth.partials);
+    app.all('/api/:name', auth.api);
 });
 
 app.namespace('/module_1', function(){

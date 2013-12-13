@@ -26,6 +26,8 @@ form(novalidate, name='loginForm').form-horizontal
         label.col-lg-2.col-md-2
         .col-lg-10.col-md-10
             a(ui-sref="auth.resetCredentials", ng-click="auth.showResetCredentials()") Forgot my credentials - Reset
+            | &#160; | &#160;
+            a(ui-sref="auth.createAccount", ng-click="auth.showCreateAccount()") Create Account
 
     .button-group
         button.btn.btn-primary(ng-click='auth.login()', ng-disabled='loginForm.$invalid', tabindex='4') Login
